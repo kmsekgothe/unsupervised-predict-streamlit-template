@@ -15,7 +15,7 @@ Data contains some of the dat being used in this project some of the data used i
 
 ## 1) Overview
 
-![Movie_Recommendations](resources/imgs/Image_header.png)
+![Movie_Recommendations](API/resources/imgs/Image_header.png)
 
 This repository forms the basis of *Task 2* for the **Unsupervised Predict** within EDSA's Data Science course. It hosts template code which will enable students to deploy a basic recommender engine based upon the [Streamlit](https://www.streamlit.io/) web application framework.
 
@@ -23,7 +23,7 @@ As part of the predict, students are expected to expand on this base template; i
 
 #### 1.1) What is a Recommender System?
 
-[![What is an API](resources/imgs/What_is_a_recommender_system.png)](https://youtu.be/Eeg1DEeWUjA)
+[![What is an API](API/resources/imgs/What_is_a_recommender_system.png)](https://youtu.be/Eeg1DEeWUjA)
 
 Recommender systems are the unsung heroes of our modern technological world. Search engines, online shopping, streaming multimedia platforms, news-feeds - all of these services depend on recommendation algorithms in order to provide users the content they want to interact with.
 
