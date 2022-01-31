@@ -36,6 +36,7 @@ import numpy as np
 from utils.data_loader import load_movie_titles
 from recommenders.collaborative_based import collab_model
 from recommenders.content_based import content_model
+from PIL import Image
 
 # Data Loading
 title_list = load_movie_titles('resources/data/movies.csv')
@@ -45,7 +46,7 @@ def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview"]
+    page_options = ["Recommender System","Solution Overview","EDA","Our Recommenders","Authors"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -100,10 +101,66 @@ def main():
     # -------------------------------------------------------------------
 
     # ------------- SAFE FOR ALTERING/EXTENSION -------------------
+    tweets_bar_img = Image.open('resources/imgs/tweets_barr.png')
+    word_cloud_img = Image.open('resources/imgs/Word_Cloud.png')
+    
     if page_selection == "Solution Overview":
         st.title("Solution Overview")
         st.write("Describe your winning approach on this page")
+    if page_selection == "EDA":
+        st.title("Exploratory Data Analysis")
+        st.write("Share our EDA on this page")
+        st.image(tweets_bar_img)
+        st.image(word_cloud_img)
+    if page_selection == "Our Recommenders":
+        st.title("About Our recommenders")
+        st.write("Make our sales pitch here")
+        st.write("Our collaborative model that takes into account the \ The RMSE value\
+                    provide here an example of the glory real rating and the predicted rating")
+        st.write("Our content based system looks at the cosine similarities matrix and makes a recommendation \
+            of those movies which are nearer to your first three choice according to the euclidean distances")
+        st.write("Recommendation systems are forecasted to be worth 70 billion in the next 3 years and a \
+            recommender of your own is definitely an investment worth taking on sooner than later")
+    if page_selection == "Authors":
+        st.title("Starring")
+        # st.write("Describe your winning approach on this page")
+        image_k = Image.open('resources/imgs/karabo2.jpeg')
+        #st.image(image_k)
+        
+        image_m = Image.open('resources/imgs/mpil2.png')
+		#image_a = Image.open('resources/imgs/alyssa.jpg')
+        image_a= Image.open('resources/imgs/m.jpg')
+        image_h= Image.open('resources/imgs/Tshepo.jpeg')
+        image_b= Image.open('resources/imgs/bohlale.jpeg')
+        col1, col2 = st.columns(2)
 
+        with col1:
+            
+            st.subheader("Karabo Mampuru")
+            st.image(image_k,
+            caption='www',
+            width = 200)
+            st.subheader("Muhammed Irfaan")
+            st.image(image_a, 
+            caption='www',
+            width = 200)
+            st.subheader("Tshepo Mokgata")
+            st.image(image_h,
+            caption='wwww',
+            
+            width = 200)	
+
+        with col2:
+            st.subheader("Mpilenhle Hlatshwayo")
+            st.image(image_m,
+                caption='wwww',
+                width = 200)
+
+            
+            st.subheader("Bohlale Kekana")
+            st.image(image_b, 
+            caption='www',
+            width = 200)
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
 
