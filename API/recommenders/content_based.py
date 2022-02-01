@@ -37,8 +37,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 # Importing data
 #/home/explore-student/unsupervised_data/unsupervised_movie_data/
 movies = pd.read_csv('resources/data/movies.csv', sep = ',')
-ratings = pd.read_csv('resources/data/old/ratings.csv')
+ratings = pd.read_csv('resources/data/ratings.csv')
 movies.dropna(inplace=True)
+path = "/home/explore-student/unsupervised_data/unsupervised_movie_data";
 
 movies_df = pd.read_csv('/home/explore-student/unsupervised_data/unsupervised_movie_data/movies.csv')
 imdb_data = pd.read_csv('/home/explore-student/unsupervised_data/unsupervised_movie_data/imdb_data.csv')
@@ -110,7 +111,7 @@ def data_preprocessing(subset_size):
     
     # Split genre data into individual words.
     movies['keyWords'] = movies['genres'].str.replace('|', ' ')
-    print(movies.head(3))
+    #print(movies.head(3))
     # Subset of the data
     movies_subset = movies[:subset_size]
     
@@ -141,7 +142,7 @@ def content_model(movie_list,top_n=10):
     data = data_preprocessing(27000)
     # Instantiating and generating the count matrix
     count_vec = CountVectorizer()
-    count_matrix = count_vec.fit_transform(data['corpus'])
+    count_matrix = count_vec.fit_transform(data['keyWords'])
     indices = pd.Series(data['title'])
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
     #print("33333333333333333333333333333333333333333333")
