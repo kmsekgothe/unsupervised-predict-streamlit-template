@@ -115,8 +115,7 @@ def main():
     if page_selection == "Our Recommenders":
         st.title("About Our recommenders")
         st.write("Make our sales pitch here")
-        st.write("Our collaborative model that takes into account the \ The RMSE value\
-                    provide here an example of the glory real rating and the predicted rating")
+        st.write("Our collaborative model that takes into account the INSERT DESCRIPTION OF MODEL")
         st.write("Our content based system looks at the cosine similarities matrix and makes a recommendation \
             of those movies which are nearer to your first three choice according to the euclidean distances")
         st.write("Recommendation systems are forecasted to be worth 70 billion in the next 3 years and a \
@@ -138,28 +137,29 @@ def main():
             
             st.subheader("Karabo Mampuru")
             st.image(image_k,
-            caption='www',
+            caption='"I can do this all day" -  Avengers Endgame',
             width = 200)
             st.subheader("Muhammed Irfaan")
             st.image(image_a, 
-            caption='www',
+            caption='"Carpe diem. Sieze the day, boys. Make your lives extraordinary" Dead Poets Society',
             width = 200)
             st.subheader("Tshepo Mokgata")
             st.image(image_h,
-            caption='wwww',
+            caption='"May the force be with you" - Star Wars',
             
             width = 200)	
 
         with col2:
             st.subheader("Mpilenhle Hlatshwayo")
             st.image(image_m,
-                caption='wwww',
+                caption='"I am Groot" - Guardians of the Galaxy',
                 width = 200)
 
             
             st.subheader("Bohlale Kekana")
             st.image(image_b, 
-            caption='www',
+            caption='"I would rather fight beside you than any army of thousands!\
+                Let no man forget how menacing we are! We are lions" - Troy',
             width = 200)
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
