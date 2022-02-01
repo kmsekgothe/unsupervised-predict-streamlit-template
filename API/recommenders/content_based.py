@@ -41,8 +41,8 @@ ratings = pd.read_csv('resources/data/ratings.csv')
 movies.dropna(inplace=True)
 path = "/home/explore-student/unsupervised_data/unsupervised_movie_data";
 
-movies_df = pd.read_csv('/home/explore-student/unsupervised_data/unsupervised_movie_data/movies.csv')
-imdb_data = pd.read_csv('/home/explore-student/unsupervised_data/unsupervised_movie_data/imdb_data.csv')
+movies_df = pd.read_csv('resources/data/movies.csv',sep=',')
+imdb_data = pd.read_csv('resources/data/imdb_data.csv')
 
 def data_preprocessing(subset_size):
     """Prepare data for use within Content filtering algorithm.
@@ -91,7 +91,7 @@ def data_preprocessing(subset_size):
     corpus = []
     
     # List of the columns we want to use to create our corpus 
-    columns = [ 'plot_keywords']
+    columns = [ 'genres']
 
     # For each movie, combine the contents of the selected columns to form it's unique corpus 
     for i in range(0, len(df['movieId'])):
@@ -102,7 +102,7 @@ def data_preprocessing(subset_size):
 
     # Add the corpus information for each movie to the dataframe 
     df['corpus'] = corpus
-    df.set_index('movieId', inplace=True)
+    #df.set_index('movieId', inplace=True)
 
     # Drop the columns we don't need anymore to preserve memory
     df.drop(columns=['title_cast', 'director', 'plot_keywords', 'genres', 'year'], inplace=True)
@@ -111,13 +111,13 @@ def data_preprocessing(subset_size):
     
     # Split genre data into individual words.
     movies['keyWords'] = movies['genres'].str.replace('|', ' ')
-    #print(movies.head(3))
+    print(movies.head(3))
     # Subset of the data
     movies_subset = movies[:subset_size]
     
     #return movies_subset
     the_subset = df[:subset_size]
-    #print(the_subset.head(5))
+    print(the_subset.head(5))
     #print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
     return movies_subset
 
@@ -141,11 +141,11 @@ def content_model(movie_list,top_n=10):
     recommended_movies = []
     data = data_preprocessing(27000)
     # Instantiating and generating the count matrix
-    count_vec = CountVectorizer()
+    count_vec = CountVectorizer(analyzer='word', ngram_range=(2, 2))
     count_matrix = count_vec.fit_transform(data['keyWords'])
     indices = pd.Series(data['title'])
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
-    #print("33333333333333333333333333333333333333333333")
+    print("33333333333333333333333333333333333333333333")
     # Getting the index of the movie that matches the title
     idx_1 = indices[indices == movie_list[0]].index[0]
     idx_2 = indices[indices == movie_list[1]].index[0]
@@ -159,7 +159,7 @@ def content_model(movie_list,top_n=10):
     score_series_2 = pd.Series(rank_2).sort_values(ascending = False)
     score_series_3 = pd.Series(rank_3).sort_values(ascending = False)
     # Getting the indexes of the 10 most similar movies
-    #print("2222222222222222222222222222222222222222")
+    print("2222222222222222222222222222222222222222")
     listings = score_series_1.append(score_series_2).append(score_series_3).sort_values(ascending = False)
 
     # Store movie names
@@ -171,5 +171,5 @@ def content_model(movie_list,top_n=10):
     for i in top_indexes[:top_n]:
         recommended_movies.append(list(movies['title'])[i])
     
-    #print("111111111111111111111111111111111")
+    print("111111111111111111111111111111111")
     return recommended_movies
