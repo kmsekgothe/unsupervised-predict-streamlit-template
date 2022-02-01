@@ -137,29 +137,29 @@ def main():
             
             st.subheader("Karabo Mampuru")
             st.image(image_k,
-            caption='"I can do this all day" -  Avengers Endgame',
+            caption='"I can do this all day" -  Avengers: Endgame(2019)',
             width = 200)
             st.subheader("Muhammed Irfaan")
             st.image(image_a, 
-            caption='"Carpe diem. Sieze the day, boys. Make your lives extraordinary" Dead Poets Society',
+            caption='"Carpe diem. Sieze the day, boys. Make your lives extraordinary" Dead Poets Society(1989)',
             width = 200)
             st.subheader("Tshepo Mokgata")
             st.image(image_h,
-            caption='"May the force be with you" - Star Wars',
+            caption='"May the force be with you" - Star Wars:The force awakens(2015)',
             
             width = 200)	
 
         with col2:
             st.subheader("Mpilenhle Hlatshwayo")
             st.image(image_m,
-                caption='"I am Groot" - Guardians of the Galaxy',
+                caption='"I am Groot" - Guardians of the Galaxy(2014)',
                 width = 200)
 
             
             st.subheader("Bohlale Kekana")
             st.image(image_b, 
             caption='"I would rather fight beside you than any army of thousands!\
-                Let no man forget how menacing we are! We are lions" - Troy',
+                Let no man forget how menacing we are! We are lions" - Troy(2004)',
             width = 200)
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
