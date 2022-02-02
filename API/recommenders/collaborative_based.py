@@ -144,23 +144,18 @@ def collab_model(movie_list,top_n=10):
     print(inputMovies.head(5))
     
     userSubset = ratings_df[ratings_df['movieId'].isin(inputMovies['movieId'].tolist())]
+    print("user subset")
     print(userSubset.head())
     userSubsetGroup = userSubset.groupby(['userId'])
-    print(len(userSubsetGroup.get_group(1130)))
-    print(userSubsetGroup.get_group(110))
-    print(len(userSubsetGroup.get_group(110)))
+    #print(userSubsetGroup.head())
     userSubsetGroup = sorted(userSubsetGroup,  key=lambda x: len(x[1]), reverse=True)
-    userSubsetGroup[0][1]
+    #userSubsetGroup[0][1]
     userSubsetGroup = userSubsetGroup[0:100]
-    
-    
-    #Store the Pearson Correlation in a dictionary, where the key is the user Id and the value is the coefficient
-    pearsonCorrelationDict = {}
-
-    #For every user group in our subset
+    users=[]
     for name, group in userSubsetGroup:
         
         #Let's start by sorting the input and current user group so the values aren't mixed up later on
+        users.append(name)
         group = group.sort_values(by='movieId')
         inputMovies = inputMovies.sort_values(by='movieId')
         
@@ -171,8 +166,8 @@ def collab_model(movie_list,top_n=10):
         temp_df = inputMovies[inputMovies['movieId'].isin(group['movieId'].tolist())]
         
         ###For Debugging Purpose
-        #if nRatings<5:
-        #    print(inputMovies['movieId'].isin(group['movieId'].tolist()))
+        if nRatings<5:
+            print(inputMovies['movieId'].isin(group['movieId'].tolist()))
         #    break
         #else:
         #    continue
@@ -182,25 +177,9 @@ def collab_model(movie_list,top_n=10):
         
         #Let's also put the current user group reviews in a list format
         tempGroupList = group['rating'].tolist()
-        
-        #Now let's calculate the pearson correlation between two users, so called, x and y
-
-        #For package based
-        from scipy.stats import pearsonr
-        pearsonr(tempRatingList,tempGroupList)[0]
-
-        # #For hard code based
-        # Sxx = sum([i**2 for i in tempRatingList]) - pow(sum(tempRatingList),2)/float(nRatings)
-        # Syy = sum([i**2 for i in tempGroupList]) - pow(sum(tempGroupList),2)/float(nRatings)
-        # Sxy = sum( i*j for i, j in zip(tempRatingList, tempGroupList)) - sum(tempRatingList)*sum(tempGroupList)/float(nRatings)
-        
-        # #If the denominator is different than zero, then divide, else, 0 correlation.
-        # if Sxx != 0 and Syy != 0:
-        #     pearsonCorrelationDict[name] = Sxy/np.sqrt(Sxx*Syy)
-        # else:
-        #     pearsonCorrelationDict[name] = 0
-            
     print("after long pears")
+    users = users[0:10]
+    print(users)
     
     
     
@@ -218,32 +197,40 @@ def collab_model(movie_list,top_n=10):
     
     
     
-    # movies_df
-    # indices = pd.Series(movies_df['title'])
-    # movie_ids = pred_movies(movie_list)
-    # df_init_users = ratings_df[ratings_df['userId']==movie_ids[0]]
-    # for i in movie_ids :
-    #     df_init_users=df_init_users.append(ratings_df[ratings_df['userId']==i])
-    # # Getting the cosine similarity matrix
-    # cosine_sim = cosine_similarity(np.array(df_init_users), np.array(df_init_users))
-    # idx_1 = indices[indices == movie_list[0]].index[0]
-    # idx_2 = indices[indices == movie_list[1]].index[0]
-    # idx_3 = indices[indices == movie_list[2]].index[0]
-    # # Creating a Series with the similarity scores in descending order
-    # rank_1 = cosine_sim[idx_1]
-    # rank_2 = cosine_sim[idx_2]
-    # rank_3 = cosine_sim[idx_3]
-    # # Calculating the scores
-    # score_series_1 = pd.Series(rank_1).sort_values(ascending = False)
-    # score_series_2 = pd.Series(rank_2).sort_values(ascending = False)
-    # score_series_3 = pd.Series(rank_3).sort_values(ascending = False)
-    #  # Appending the names of movies
-    # listings = score_series_1.append(score_series_2).append(score_series_3).sort_values(ascending = False)
-    # recommended_movies = []
-    # # Choose top 50
-    # top_50_indexes = list(listings.iloc[1:50].index)
-    # # Removing chosen movies
-    # top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
-    # for i in top_indexes[:top_n]:
-    #     recommended_movies.append(list(movies_df['title'])[i])
-    # return recommended_movies
+    #movies_df
+    indices = pd.Series(movies_df['title'])
+    #movie_ids = pred_movies(movie_list)
+    movie_ids = users
+    print("11111111111111111111111")
+    df_init_users = ratings_df[ratings_df['userId']==movie_ids[0]]
+    for i in movie_ids :
+        df_init_users=df_init_users.append(ratings_df[ratings_df['userId']==i])
+    # Getting the cosine similarity matrix
+    print("222222222222222222222222222")
+    cosine_sim = cosine_similarity(np.array(df_init_users), np.array(df_init_users))
+    idx_1 = indices[indices == movie_list[0]].index[0]
+    idx_2 = indices[indices == movie_list[1]].index[0]
+    idx_3 = indices[indices == movie_list[2]].index[0]
+    # Creating a Series with the similarity scores in descending order
+    print("33333333333333333333333333333")
+    rank_1 = cosine_sim[idx_1]
+    rank_2 = cosine_sim[idx_2]
+    rank_3 = cosine_sim[idx_3]
+    # Calculating the scores
+    score_series_1 = pd.Series(rank_1).sort_values(ascending = False)
+    score_series_2 = pd.Series(rank_2).sort_values(ascending = False)
+    score_series_3 = pd.Series(rank_3).sort_values(ascending = False)
+     # Appending the names of movies
+    listings = score_series_1.append(score_series_2).append(score_series_3).sort_values(ascending = False)
+    recommended_movies = []
+    # Choose top 50
+    print("444444444444444444444444444444444444444444")
+    top_50_indexes = list(listings.iloc[1:50].index)
+    # Removing chosen movies
+    top_indexes = np.setdiff1d(top_50_indexes,[idx_1,idx_2,idx_3])
+    for i in top_indexes[:top_n]:
+        recommended_movies.append(list(movies_df['title'])[i])
+        
+    #return recommended_movies
+    
+    return ["title 1","title 2","title 3","title 4","title 5","title 6","title 7","title 8","title 9","title 10"]
