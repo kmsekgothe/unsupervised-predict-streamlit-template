@@ -101,23 +101,48 @@ def main():
     # -------------------------------------------------------------------
 
     # ------------- SAFE FOR ALTERING/EXTENSION -------------------
-    tweets_bar_img = Image.open('resources/imgs/tweets_barr.png')
-    word_cloud_img = Image.open('resources/imgs/Word_Cloud.png')
-    
+    bar_img = Image.open('resources/imgs/ratings.png')
+    sol_img = Image.open('resources/imgs/both.png')
+    solu_img = Image.open('resources/imgs/better_both.png')
+    #dir_img = Image.open('resources/imgs/director.png')
+    ac_img = Image.open('resources/imgs/actors.png')
     if page_selection == "Solution Overview":
         st.title("Solution Overview")
-        st.write("Describe your winning approach on this page")
+        st.image(sol_img)
+        st.write("we attempted both collaborative and content based models to compare and contrast which method \
+            is the best for our mission. We decided on collaborative based filtering methods because they draw only\
+                on past interaction between users and items. Furthermore, unlike their content-based counterparts, \
+                    they do not require item metadata.")
+
+        st.write("We settled on the singular value decomposition(SVD), a collaborative filtering method…not only \
+            because of its good RMSE score, run time and extraordinary score on Kaggle but because of its advantage\
+                of being computationally more efficient than content based methods.Profiles of users maintained in \
+                    our recommender are based on the customers past interactions with items and enable powerful\
+                        analysis. So we want to make sure that your users are always provided with the best \
+                        possible experience. Even in industries where there isn't a large amount of competition, \
+                        a good user experience will still lead to more sales and more profit")
     if page_selection == "EDA":
-        st.title("Exploratory Data Analysis")
-        st.write("Share our EDA on this page")
-        st.image(tweets_bar_img)
-        st.image(word_cloud_img)
+        st.title("Insights into the data")
+        st.write("Overview of insights")
+        st.image(bar_img)
+        st.write("This graph compares the number of ratings per rating, but it also shows that a lot of people \
+            care to rate their experience after watching a movie meaning there will not be a shortage of data ")
+        st.image(ac_img)
+        st.write("Actors,Directors, cast members and times change. This is why some movies can be remade and improve in ratings\
+            some roles really depend on actors who are able to embody a character, and similar expressions can be said for directors \
+                this app is here to keep track of all this and make the right recommendations.")
     if page_selection == "Our Recommenders":
         st.title("About Our recommenders")
-        st.write("Make our sales pitch here")
-        st.write("Our collaborative model that takes into account the INSERT DESCRIPTION OF MODEL")
-        st.write("Our content based system looks at the cosine similarities matrix and makes a recommendation \
-            of those movies which are nearer to your first three choice according to the euclidean distances")
+        st.write("Why We Recommend These Recommenders")
+        st.image(solu_img)
+        st.write("Our collaborative model that takes into account the In collaborative filtering the behaviour \
+            of the users is used to make recommendations to other similar users based on the preferences of other\
+                users. An example of that would be recommending a product on Instagram based on a close follower or friend \
+                    liking the similar product")
+        st.write("This system recommends items based on similarities. it looks at the properties of an item \
+            and tries to look at different items that have similar properties and recommends them to the user. \
+                In Content-based Filtering, we seek to make recommendations based on how similar \
+                    the properties of an item are to other items")
         st.write("Recommendation systems are forecasted to be worth 70 billion in the next 3 years and a \
             recommender of your own is definitely an investment worth taking on sooner than later")
     if page_selection == "Authors":
