@@ -32,8 +32,10 @@ import os
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
-
+import pickle
+import joblib
 # Importing data
 #/home/explore-student/unsupervised_data/unsupervised_movie_data/
 movies = pd.read_csv('resources/data/movies.csv', sep = ',')
@@ -43,6 +45,7 @@ path = "/home/explore-student/unsupervised_data/unsupervised_movie_data";
 
 movies_df = pd.read_csv('resources/data/movies.csv',sep=',')
 imdb_data = pd.read_csv('resources/data/imdb_data.csv')
+#cv = joblib.load(open('resources/models/Vectorizer2.pkl', 'rb'))
 
 def data_preprocessing(subset_size):
     """Prepare data for use within Content filtering algorithm.
@@ -91,7 +94,7 @@ def data_preprocessing(subset_size):
     corpus = []
     
     # List of the columns we want to use to create our corpus 
-    columns = [ 'genres']
+    columns = [ 'plot_keywords', 'genres', 'year']
 
     # For each movie, combine the contents of the selected columns to form it's unique corpus 
     for i in range(0, len(df['movieId'])):
@@ -141,8 +144,11 @@ def content_model(movie_list,top_n=10):
     recommended_movies = []
     data = data_preprocessing(27000)
     # Instantiating and generating the count matrix
+    #tifVec = TfidfVectorizer()
+    #count_matrix = tifVec.fit_transform(data['keyWords'])
     count_vec = CountVectorizer(analyzer='word', ngram_range=(2, 2))
     count_matrix = count_vec.fit_transform(data['keyWords'])
+    
     indices = pd.Series(data['title'])
     cosine_sim = cosine_similarity(count_matrix, count_matrix)
     print("33333333333333333333333333333333333333333333")
