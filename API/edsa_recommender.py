@@ -109,7 +109,7 @@ def main():
     if page_selection == "Solution Overview":
         st.title("Solution Overview")
         st.image(sol_img)
-        st.write("we attempted both collaborative and content based models to compare and contrast which method \
+        st.write("We attempted both collaborative and content based models to compare and contrast which method \
             is the best for our mission. We decided on collaborative based filtering methods because they draw only\
                 on past interaction between users and items. Furthermore, unlike their content-based counterparts, \
                     they do not require item metadata.")
@@ -121,7 +121,7 @@ def main():
                         analysis. So we want to make sure that your users are always provided with the best \
                         possible experience. Even in industries where there isn't a large amount of competition, \
                         a good user experience will still lead to more sales and more profit")
-    if page_selection == "EDA":
+    if page_selection == "Insights":
         st.title("Insights into the data")
         st.write("Overview of insights")
         st.image(bar_img)
@@ -143,7 +143,7 @@ def main():
             and tries to look at different items that have similar properties and recommends them to the user. \
                 In Content-based Filtering, we seek to make recommendations based on how similar \
                     the properties of an item are to other items")
-        st.write("Recommendation systems are forecasted to be worth 70 billion in the next 3 years and a \
+        st.write("Recommendation systems are forecasted to be worth 70 billion dollars in the next 3 years and a \
             recommender of your own is definitely an investment worth taking on sooner than later")
     if page_selection == "Authors":
         st.title("Starring")
