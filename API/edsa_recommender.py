@@ -121,7 +121,7 @@ def main():
                         analysis. So we want to make sure that your users are always provided with the best \
                         possible experience. Even in industries where there isn't a large amount of competition, \
                         a good user experience will still lead to more sales and more profit")
-    if page_selection == "Insights":
+    if page_selection == "EDA":
         st.title("Insights into the data")
         st.write("Overview of insights")
         st.image(bar_img)
